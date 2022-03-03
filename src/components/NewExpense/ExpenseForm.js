@@ -28,7 +28,7 @@ const ExpenseForm = (props) => {
         }
 
         props.onSaveExpenseData(expenseData);
-        //comunicating with parent by passing the parameter expenseData
+        //communicating with parent by passing the parameter expenseData
 
         setEnteredTitle('');
         setEnteredAmount('');
