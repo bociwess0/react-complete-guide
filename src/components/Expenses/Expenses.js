@@ -6,14 +6,20 @@ import Card from "../UI/Card";
 
 function Expenses(props) {
     const [selectedItem, setSelectedItem] = useState('2020');
+
     const saveSelectedDataHandler = selectedYear => {
         setSelectedItem(selectedYear);
     }
-    console.log(selectedItem);
+    
+    const filteredExpenses = props.items.filter(expense => {
+        return expense.date.getFullYear().toString() === selectedItem;
+    });
 
+
+    //we use key to ensure that our item is added at the beggining of the list
     return <Card className="expenses">
             <ExpensesFilter selected={selectedItem} onSaveSelectedDataHandler={saveSelectedDataHandler} />
-            {props.items.map(
+            {filteredExpenses.map(
                 expense => 
                     <ExpenseItem
                     key={expense.id} 
