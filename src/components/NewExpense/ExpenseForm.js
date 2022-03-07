@@ -54,6 +54,7 @@ const ExpenseForm = (props) => {
             </div>
         </div>
         <div className='new-expense__actions' >
+            <button type="button" onClick={props.onCancel}>Cancel</button>
             <button type="submit" >Add Expense</button>
             {/* Whenever a form is submitted, the page reloads becouse the browser automatically
             sends a requsted to the server */}
