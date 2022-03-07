@@ -3,6 +3,7 @@ import ExpensesFilter from "./ExpensesFilter";
 import './Expenses.css'
 import Card from "../UI/Card";
 import ExpensesList from "./ExpensesList";
+import ExpensesChart from "./ExpensesChart";
 
 function Expenses(props) {
     const [selectedItem, setSelectedItem] = useState('2020');
@@ -21,6 +22,7 @@ function Expenses(props) {
     //we use key to ensure that our item is added at the beggining of the list
     return <Card className="expenses">
             <ExpensesFilter selected={selectedItem} onSaveSelectedDataHandler={saveSelectedDataHandler} />
+            <ExpensesChart expenses={filteredExpenses} />
             <ExpensesList items={filteredExpenses} />
     </Card>
 }
