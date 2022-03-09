@@ -1,0 +1,35 @@
+.form-control {
+    margin-top: 5px;
+    height: 25px;
+    border-radius: 0;
+    border-color: #9a9b9c;
+}
+
+.form > * + * {
+    margin-top: 15px;
+}
+
+label {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #40005d;
+    border-radius: 0;
+    font-size: 15px;
+    border: none;
+    max-height: 25px;
+}
+
+.btn:focus,
+.btn:hover,
+.btn:active {
+    background: #40005d;
+    border:none;
+    color: white;
+    box-shadow: none;
+}
