@@ -1,20 +1,46 @@
-import React from "react";
+import React, {useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Form.css';
 import Card from "./Card";
 
 function Form(props) {
+    const [enteredUsername, setEnteredUsername] = useState('');
+    const [enteredAge, setEnteredAge] = useState('');
+
+    const userNameChangeHandler = (event) => {
+        setEnteredUsername(event.target.value);
+    }
+
+    const AgeChangeHandler = (event) => {
+        setEnteredAge(event.target.value);
+    }
+
+    const submitHandler = (event) => {
+        event.preventDefault();
+
+        const newUser = {
+            username: enteredUsername,
+            age: enteredAge,
+        }
+
+        props.onSavedNewUser(newUser);
+        props.startEditing(true);
+        
+        setEnteredUsername('');
+        setEnteredAge('');
+    }
+
     return <Card>
-            <form className="form">
-            <div class="form-group">
+            <form className="form" onSubmit={submitHandler}>
+            <div className="form-group">
                 <label >Username</label>
-                <input type="text" class="form-control"/>
+                <input type="text" className="form-control" value={enteredUsername} onChange={userNameChangeHandler}/>
             </div>
-            <div class="form-group">
+            <div className="form-group">
                 <label >Age(Years)</label>
-                <input type="text" class="form-control"/>
+                <input type="text" className="form-control" value={enteredAge} onChange={AgeChangeHandler}/>
             </div>
-            <button type="submit" class="btn btn-primary">Add User</button>
+            <button type="submit" className="btn btn-primary">Add User</button>
         </form>
     </Card>
 }
