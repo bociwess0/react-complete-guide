@@ -4,18 +4,10 @@ import './App.css';
 import NewUsers from './components/NewUsers';
 import Users from './components/Users';
 
-const DUMMY_USERS = [
-  {
-      id: 1,
-      username: 'Nikola',
-      age: 23
-  }
-]
-
 function App() {
 
 
-const[allUsers, setAllUsers ] = useState(DUMMY_USERS);
+const[allUsers, setAllUsers ] = useState([]);
 
 
   const addUsersHandler = (user) => {
