@@ -17,11 +17,15 @@ function App() {
 
 const[allUsers, setAllUsers ] = useState(DUMMY_USERS);
 
-const addUsersHandler = (user) => {
-    setAllUsers((prevUsers) => {
-    return [user, ...prevUsers];
-    });
-}
+
+  const addUsersHandler = (user) => {
+      setAllUsers((prevUsers) => {
+      return [user, ...prevUsers];
+      });
+  }
+
+  const [isEmpty, setIsEmpty] = useState(false);
+
 
   return <div className='container'>
         <NewUsers onAddUser ={addUsersHandler}/>

@@ -6,9 +6,7 @@ function User(props) {
 
     const showUser = props.username + ' ' + '(' + props.age + ')';
 
-    return <Card>
-        <div className="user">{showUser}</div>
-    </Card>
+    return <div className="user">{showUser}</div>
 }
 
 export default User;
