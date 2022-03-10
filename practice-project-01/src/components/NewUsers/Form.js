@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Form.css';
-import Card from "./Card";
+import Card from '../../components/UI/Card';
 
 function Form(props) {
     const [enteredUsername, setEnteredUsername] = useState('');

@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import NewUsers from './components/NewUsers';
-import Users from './components/Users';
+import NewUsers from './components/NewUsers/NewUsers';
+import Users from './components/Users/Users';
 
 function App() {
 
