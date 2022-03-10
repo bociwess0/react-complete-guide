@@ -24,7 +24,6 @@ const[allUsers, setAllUsers ] = useState(DUMMY_USERS);
       });
   }
 
-  const [isEmpty, setIsEmpty] = useState(false);
 
 
   return <div className='container'>

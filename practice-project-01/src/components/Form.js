@@ -17,11 +17,19 @@ function Form(props) {
 
     const submitHandler = (event) => {
         event.preventDefault();
+        if(enteredUsername.trim().length===0 ||  enteredAge.trim().length === 0) {
+            return;
+        }
+
+        if(enteredAge < 1) {
+            return;
+        }
 
         const newUser = {
             username: enteredUsername,
             age: enteredAge,
         }
+
 
         props.onSavedNewUser(newUser);
         props.startEditing(true);
@@ -38,7 +46,7 @@ function Form(props) {
             </div>
             <div className="form-group">
                 <label >Age(Years)</label>
-                <input type="text" className="form-control" value={enteredAge} onChange={AgeChangeHandler}/>
+                <input type="number" className="form-control" value={enteredAge} onChange={AgeChangeHandler}/>
             </div>
             <button type="submit" className="btn btn-primary">Add User</button>
         </form>
