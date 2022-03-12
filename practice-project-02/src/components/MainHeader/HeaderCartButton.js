@@ -3,9 +3,9 @@ import CartIcon from "../Cart/CartIcon";
 import OrderContext from "../Context/orderContext";
 import './HeaderCartButton.css';
 
-function HeaderCartButton() {
+function HeaderCartButton(props) {
     const ctx = useContext(OrderContext);
-    return <div className="button">
+    return <div className="button" onClick={props.showModal}>
         <div className="icon">
             <CartIcon />
         </div>

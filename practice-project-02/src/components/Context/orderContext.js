@@ -7,6 +7,7 @@ const OrderContext = React.createContext({
 
 export const OrderContextProvider = (props) => {
     const [ordersNumber, setOrdersNumber] = useState(0);
+    const [cartItems, setCartItems] = useState([]);
 
     const addOrderHandler = (numberOfOrders) => {
         setOrdersNumber(ordersNumber + parseInt(numberOfOrders));

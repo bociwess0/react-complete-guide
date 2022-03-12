@@ -1,12 +1,11 @@
 import React from "react";
 import Cart from "../Cart/Cart";
-import Card from "./Card";
 import './Modal.css';
 
-function Modal() {
-    return <div className="backdrop">
+function Modal(props) {
+    return <div className="backdrop" onClick={props.closeModal}>
         <div className="modal">
-            <Cart />
+            <Cart closeModal={props.closeModal} />
         </div>
     </div>
 }
