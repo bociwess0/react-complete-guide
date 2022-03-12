@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import OrderContext from "../Context/orderContext";
 import './Cart.css'
 import CartItem from "./CartItem";
 
 function Cart(props) {
     const ctx = useContext(OrderContext);
+
     return <div>
         <ul className="cart-items">
         {ctx.cartItems.map((item)=>(
@@ -18,7 +19,7 @@ function Cart(props) {
         </ul>
         <div className="total">
             <h3>Total Amount</h3>
-            <h3>135$</h3>
+            <h3>{ctx.total}$</h3>
         </div>
         <div className="actions">
             <button type="button" onClick={props.closeModal}>Close</button>

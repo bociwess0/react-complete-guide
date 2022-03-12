@@ -32,6 +32,7 @@ const OrderContext = React.createContext({
     meals: [],
     cartItems: [],
     ordersNumber: 0,
+    total: 0,
     onAddOrder: (cartItem) => {},
 });
 
@@ -39,18 +40,20 @@ export const OrderContextProvider = (props) => {
     const [ordersNumber, setOrdersNumber] = useState(0);
     const [cartItems, setCartItems] = useState([]);
     const [meals, setMeals] = useState(DUMMY_MEALS);
+    const [sum, setSum] = useState(0);
 
     const addOrderHandler = (cartItem) => {
         setOrdersNumber(ordersNumber + parseInt(cartItem.amount));
         setCartItems((prevItems) => {
             return [cartItem, ...prevItems];
         });
-      
+        setSum(sum + parseFloat(cartItem.price) * parseInt(cartItem.amount));
     }
 
     return <OrderContext.Provider value={{meals: meals ,
                                           cartItems: cartItems, 
-                                          ordersNumber: ordersNumber, 
+                                          ordersNumber: ordersNumber,
+                                          total: sum, 
                                           onAddOrder: addOrderHandler,}}>{props.children}</OrderContext.Provider>
 }
 

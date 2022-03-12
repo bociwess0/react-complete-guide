@@ -6,13 +6,14 @@ import MealItemForm from './MealItemForm';
 function MealItem(props) {
     const ctx = useContext(OrderContext);
     const [numberOfOrder, setNumberOfOrder] = useState(1);
-    
+
     const changeNumberOfOrderHandler = (event) => {
         setNumberOfOrder(event.target.value);
     }
 
     const increaseNumberOfOrders = () => {
         const cartItem = {
+            id: props.id,
             name: props.name,
             price: props.price,
             amount: numberOfOrder
