@@ -1,25 +1,14 @@
-import React, { useContext, useState } from "react";
-import OrderContext from "../Context/orderContext";
+import React  from "react";
 import './MealItemForm.css';
 
-function MealItemForm() {
-    const ctx = useContext(OrderContext);
-    const [numberOfOrder, setNumberOfOrder] = useState(1);
-
-    const changeNumberOfOrderHandler = (event) => {
-        setNumberOfOrder(event.target.value);
-    }
+function MealItemForm(props) {
     
-    const increaseNumberOfOrders = () => {
-        ctx.onAddOrder(numberOfOrder);
-    }
-
     return <form className="form">
         <div className="input">
             <label>Amount</label>
-            <input type="number" defaultValue="1" min="1" max="20" onChange={changeNumberOfOrderHandler} />
+            <input type="number" defaultValue="1" min="1" max="20" onChange={props.onChangeNumberOfOrders} />
         </div>
-        <button type="button" onClick={increaseNumberOfOrders}  >+ Add</button>
+        <button type="button" onClick={props.onIncreaseNumber}  >+ Add</button>
     </form>
 }
 

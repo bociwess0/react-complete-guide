@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import OrderContext from "../Context/orderContext";
 import './Cart.css'
-
+import CartItem from "./CartItem";
 
 function Cart(props) {
+    const ctx = useContext(OrderContext);
     return <div>
         <ul className="cart-items">
+        {ctx.cartItems.map((item)=>(
+            <CartItem 
+                key={item.id}
+                name={item.name}
+                price={item.price}
+                amount={item.amount}
+            />
+        ))}
         </ul>
         <div className="total">
             <h3>Total Amount</h3>
