@@ -1,7 +1,8 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Header from "./components/MainHeader/Header";
 import Meals from "./components/Meals/Meals";
 import MealsSummary from "./components/Meals/MealsSummary";
+import Modal from "./components/UI/Modal";
 
 
 const DUMMY_MEALS = [
@@ -34,11 +35,12 @@ const DUMMY_MEALS = [
 function App() {
   const [meals, setMeals] = useState(DUMMY_MEALS);
   console.log(meals);
-  return <div>
-    <Header />
-    <MealsSummary />
-    <Meals meals={meals} />
-  </div>
+  return <React.Fragment>
+      <Header />
+      <MealsSummary />
+      <Meals meals={meals} />
+      {/* <Modal /> */}
+  </React.Fragment>
 }
 
 export default App;
