@@ -1,14 +1,13 @@
 import React from "react";
+import Cart from "../Cart/Cart";
 import Card from "./Card";
 import './Modal.css';
 
 function Modal() {
     return <div className="backdrop">
-        <Card>
-            <div className="modal">
-                
-            </div>
-        </Card>
+        <div className="modal">
+            <Cart />
+        </div>
     </div>
 }
 

@@ -39,7 +39,7 @@ function App() {
       <Header />
       <MealsSummary />
       <Meals meals={meals} />
-      {/* <Modal /> */}
+      <Modal />
   </React.Fragment>
 }
 
