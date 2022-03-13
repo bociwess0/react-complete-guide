@@ -13,7 +13,7 @@ const cartReducer = (state, action) => {
         // const updatedItems = state.items.concat(action.item);
         //Concat is a built-in method in JavaScript, which adds a new item to an array
         //It give's us a brand new array instead of editing the old array in memory
-        const updateTotalAmount = state.totalAmount + action.item.price * action.item.amount;
+        const updatedTotalAmount = state.totalAmount + action.item.price * action.item.amount;
 
         const existingCartItemIndex = state.items.findIndex((item) => item.id === action.item.id);
         //findIndex() is a build-in methond in JS which find the index of an item in array.
@@ -42,10 +42,35 @@ const cartReducer = (state, action) => {
             updatedItem={...action.item};
             updatedItems = state.items.concat(updatedItem);
             //if item is adding for the first time is just adding into teh cart
+
         }
         return {
             items: updatedItems,
-            totalAmount: updateTotalAmount
+            totalAmount: updatedTotalAmount
+        }
+    }
+
+    if(action.type === 'REMOVE'){
+        const existingCartItemIndex = state.items.findIndex((item) => item.id === action.id);
+        const existingCartItem = state.items[existingCartItemIndex];
+        const updatedTotalAmount = state.totalAmount - existingCartItem.price;
+
+        let updatedItems;
+        if(existingCartItem.amount === 1){
+            //if item's amount is down to one then we're removing this item
+            updatedItems = state.items.filter(item => item.id !== action.id);
+            //we're removing item from array, actually we're keeping in array all items that theire id's are not equal to 
+            //item we're gonna remove
+        } else {
+            const updatedItem = {...existingCartItem, amount: existingCartItem.amount - 1};
+            //decreasing an amount
+            updatedItems = [...state.items];
+            updatedItems [existingCartItemIndex] = updatedItem;
+        }
+        
+        return {
+            items: updatedItems,
+            totalAmount: updatedTotalAmount
         }
     }
     return defaultCartState;
