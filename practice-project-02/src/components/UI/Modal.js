@@ -3,7 +3,7 @@ import Cart from "../Cart/Cart";
 import './Modal.css';
 
 function Modal(props) {
-    return <div className="backdrop" onClick={props.closeModal}>
+    return <div className="backdrop" >
         <div className="modal">
             <Cart closeModal={props.closeModal} />
         </div>

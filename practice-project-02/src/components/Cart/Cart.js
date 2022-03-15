@@ -19,7 +19,7 @@ function Cart(props) {
         </ul>
         <div className="total">
             <h3>Total Amount</h3>
-            <h3>{ctx.total}$</h3>
+            <h3>{parseInt(ctx.total)}$</h3>
         </div>
         <div className="actions">
             <button type="button" onClick={props.closeModal}>Close</button>

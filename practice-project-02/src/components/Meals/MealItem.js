@@ -13,7 +13,7 @@ function MealItem(props) {
 
     const increaseNumberOfOrders = () => {
         const cartItem = {
-            id: props.id,
+            id: Math.random().toString(),
             name: props.name,
             price: props.price,
             amount: numberOfOrder

@@ -41,11 +41,29 @@ export const OrderContextProvider = (props) => {
     const [cartItems, setCartItems] = useState([]);
     const [meals, setMeals] = useState(DUMMY_MEALS);
     const [sum, setSum] = useState(0);
+    
 
     const addOrderHandler = (cartItem) => {
         setOrdersNumber(ordersNumber + parseInt(cartItem.amount));
-        setCartItems((prevItems) => {
-            return [cartItem, ...prevItems];
+        setCartItems(() => {
+          const existingCartItemIndex = cartItems.findIndex(
+            (item) => item.id === cartItem.id
+          );
+  
+          const existingCartItem = cartItems[existingCartItemIndex];
+          let updatedItems;
+  
+          if (existingCartItem) {
+            const updatedItem = {
+              ...existingCartItem,
+              amount: existingCartItem.amount + cartItem.amount,
+            };
+            updatedItems = [...cartItems];
+            updatedItems[existingCartItemIndex] = updatedItem;
+          } else {
+            updatedItems = cartItems.concat(cartItem);
+          }
+          return updatedItems;
         });
         setSum(sum + parseFloat(cartItem.price) * parseInt(cartItem.amount));
     }
