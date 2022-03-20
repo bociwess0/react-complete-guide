@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   //we cant use async inside the useEffect() bcs it should not return a promise, it should run synchronisly
   useEffect(() => {
@@ -24,9 +25,18 @@ const AvailableMeals = () => {
         });
       }
       setMeals(loadedMeals);
+      setIsLoading(false);
     }
     fetchMeals();
   }, [])
+
+  if(isLoading) {
+    return <section className={classes.MealsLoading}>
+      <p>Loading...</p>
+    </section>
+
+  }
+
   const mealsList = meals.map((meal) => (
     <MealItem
       key={meal.id}
