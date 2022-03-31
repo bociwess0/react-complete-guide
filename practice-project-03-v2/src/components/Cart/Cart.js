@@ -1,6 +1,6 @@
 import CartContext from '../../store/cart-context';
 import CartItem from './CartItem';
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Modal from '../UI/Modal';
 import classes from './Cart.module.css';
 import Checkout from './Checkout';
@@ -47,6 +47,17 @@ const Cart = (props) => {
     <button className={classes.button} onClick={orderMadeHandler}>Order</button>
   </div>
 
+
+  const submitFormHandler = async (userData) => {
+    await fetch('https://react-http-856b8-default-rtdb.firebaseio.com/orders.json', {
+        method: 'POST',
+        body: JSON.stringify({
+          user: userData,
+          ordeedItems: cartCtx.items
+        })
+      });
+      cartCtx.clearCart();
+  }
   
   
   return (
@@ -56,7 +67,7 @@ const Cart = (props) => {
         <span>Total Amount</span>
         <span>{totalAmount}</span>
       </div>
-      {isOrdered && <Checkout onCancel={orderCancelHandler}/>}
+      {isOrdered && <Checkout onCancel={orderCancelHandler} onSubmitForm={submitFormHandler}/>}
       {!isOrdered && orderButtons}
     </Modal>
   );
