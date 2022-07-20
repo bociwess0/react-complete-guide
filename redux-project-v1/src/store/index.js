@@ -1,0 +1,20 @@
+import {createStore} from 'redux';
+
+const redux = require('redux');
+
+const counterReducer = (state = {counter: 1}, action) => {
+    if(action.type === 'increment') {
+        return state.counter +1;
+    }
+
+    if(action.type === 'decrement') {
+        return state.counter - 1;
+    }
+
+    return state;
+}
+
+const store = createStore(counterReducer);
+
+export default store;
+
