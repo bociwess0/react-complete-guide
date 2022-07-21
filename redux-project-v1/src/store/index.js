@@ -15,18 +15,25 @@ const counterSlice = createSlice({
             state.counter --;
         },
         increase(state, action) {
-            state.counter += action.amount;
+            state.counter += action.payload;
         },
-        toggle(state) {
+        toggleCounter(state) {
             state.showCounter = !state.showCounter;
         }
     }
 });
 
 
+
 const store = configureStore({
     reducer: counterSlice.reducer
 });
 
+export const counterActions = counterSlice.actions;
+//returns an action object of this shape:
+//{ type: 'some auto-generated unique identifier }
+
+
 export default store;
+
 
