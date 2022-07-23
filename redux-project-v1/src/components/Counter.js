@@ -4,12 +4,12 @@ import { counterActions } from '../store';
 
 const Counter = () => {
   const dispatch = useDispatch();
-  const counter = useSelector(state => state.counter);
+  const counter = useSelector(state => state.counter.counter);
   /*When you use use selector, React Redux will automatically set up a subscription
   to the Redux store for this component.
   So your component will be updated and will receive the latest counter automatically
   whenever that data changes in the Redux store. */
-  const show = useSelector(state => state.showCounter);
+  const show = useSelector(state => state.counter.showCounter);
   const incrementHandler = () => {
     dispatch(counterActions.increment()); // {type: SOME_UNIQUE_IDENTIFIER}
   }
