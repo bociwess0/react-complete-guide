@@ -1,6 +1,6 @@
 import classes from './Counter.module.css';
 import { useSelector, useDispatch } from 'react-redux'; //that allows us to then automatically select a part of our state managed by the store.
-import { counterActions } from '../store';
+import { counterActions } from '../store/counter';
 
 const Counter = () => {
   const dispatch = useDispatch();
