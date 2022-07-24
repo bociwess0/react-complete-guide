@@ -1,19 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
-const initialToggleState = {
-    isShown: false
-}
-
-const toggleCartSlice = createSlice({
-    name: 'toggleCart',
-    initialState: initialToggleState,
-    reducers: {
-        toggleCart(state) {
-            state.isShown = !state.isShown;
-        }
+const uiSlice = createSlice({
+  name: 'ui',
+  initialState: { cartIsVisible: false },
+  reducers: {
+    toggle(state) {
+      state.cartIsVisible = !state.cartIsVisible;
     }
+  }
 });
 
-export const toggleCartACtions = toggleCartSlice.actions;
+export const uiActions = uiSlice.actions;
 
-export default toggleCartSlice.reducer;
+export default uiSlice;
