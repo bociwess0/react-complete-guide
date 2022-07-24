@@ -1,13 +1,21 @@
 import Cart from './components/Cart/Cart';
 import Layout from './components/Layout/Layout';
 import Products from './components/Shop/Products';
+import { Fragment } from 'react';
+import { useSelector } from 'react-redux';
+
 
 function App() {
+
+  const toggleCart = useSelector(state => state.toggleCart.isShown);
+
   return (
-    <Layout>
-      <Cart />
+    <Fragment>
+      <Layout>
+      {toggleCart && <Cart />}
       <Products />
     </Layout>
+    </Fragment>
   );
 }
 
