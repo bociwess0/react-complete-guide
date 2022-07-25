@@ -8,10 +8,10 @@ const counterReducer = (state = { counter: 0 }, action) => {
    }
 
    if(action.type === 'decrement') {
-    return {
-        counter: state.counter - 1
-    };
-}
+        return {
+            counter: state.counter - 1
+        };
+    }
    return state;
 }; //creating a reducer
 
