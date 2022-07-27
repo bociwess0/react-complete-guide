@@ -1,8 +1,13 @@
-
 import './App.css';
+import Layout from './components/UI/Layout';
+import {Fragment} from 'react'
 
 function App() {
-  return <p> Neki teskt</p>
+  return <Fragment>
+    <Layout>
+      
+    </Layout>
+  </Fragment>
 }
 
 export default App;
