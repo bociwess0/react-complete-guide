@@ -9,7 +9,6 @@ const ProductItem = (props) => {
     const {id, title, price, description } = props;
 
     const dispatch = useDispatch();
-    const cartItems = useSelector(state => state.cart.items);
 
     const addToCartHandler = () => {
         dispatch(
@@ -19,7 +18,6 @@ const ProductItem = (props) => {
             price,
           })
         );
-        console.log(cartItems);
       };
     return (
     <li className={classes.item}>
