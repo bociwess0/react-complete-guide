@@ -12,6 +12,7 @@ export const fetchCartdata = () => {
             }
 
             const data = await response.json();
+            //we are using await everywhere where we expect a promise or some data from async function  
 
             return data;
         }
@@ -61,6 +62,7 @@ export const sendCartData = (cart) => {
   
       try {
         await sendRequest();
+        //we also use await when we're calling some async function
   
         dispatch(
           uiActions.showNotification({
