@@ -1,0 +1,18 @@
+.notification {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1a8ed1;
+    height: 2rem;
+    text-align: center;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.error {
+    background-color: #690000;
+}
+
+.success {
+    background-color: #1ad1b9
+}

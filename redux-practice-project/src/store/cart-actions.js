@@ -1,4 +1,5 @@
 import { cartActions } from "./cart-slice";
+import { uiActions } from "./ui-slice";
 
 
 export const fetchCartData = () => {
@@ -24,15 +25,29 @@ export const fetchCartData = () => {
                 items: cartData.items || [],
                 totalQuantity: cartData.totalQuantity
             }));
-    
+            
+              
         } catch (error) {
-            console.log(error);
+            dispatch(
+                uiActions.showNotification({
+                  status: 'error',
+                  message: 'Fetching cart data failed!',
+                })
+              );
         }
     }
 }
 
 export const sendCartData = (cart) => {
     return async (dispatch) => {
+
+        dispatch(
+            uiActions.showNotification({
+              status: 'pending',
+              message: 'Sending cart data!',
+            })
+        );
+
         const sendRequest = async () => {
             const response = await fetch('https://redux-practice-ebddd-default-rtdb.firebaseio.com/cart.json', {
                 method: 'PUT',
@@ -46,9 +61,20 @@ export const sendCartData = (cart) => {
 
         try {
             await sendRequest();
+            dispatch(
+                uiActions.showNotification({
+                  status: 'error',
+                  message: 'Data has been successfully sent to the database!',
+                })
+              );
         }
         catch(error) {
-            console.log(error);
+            dispatch(
+                uiActions.showNotification({
+                  status: 'error',
+                  message: 'Sending cart data failed!',
+                })
+              );
         }
     }
 }
