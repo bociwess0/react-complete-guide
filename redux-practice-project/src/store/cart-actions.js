@@ -1,3 +1,5 @@
+import { cartActions } from "./cart-slice";
+
 
 export const fetchCartData = () => {
     return async (dispatch) => {
@@ -17,8 +19,11 @@ export const fetchCartData = () => {
         }
 
         try {
-            const data = fetchRequest();
-            console.log(data);
+            const cartData = await fetchRequest();
+            dispatch(cartActions.replaceCart({
+                items: cartData.items || [],
+                totalQuantity: cartData.totalQuantity
+            }));
     
         } catch (error) {
             console.log(error);
