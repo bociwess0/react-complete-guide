@@ -4,7 +4,7 @@ import {Fragment, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux';
 import Cart from './components/Cart/Cart';
 import Products from './components/Shop/Products';
-import { sendCartData } from './store/cart-actions';
+import { fetchCartData, sendCartData } from './store/cart-actions';
 
 function App() {
 
@@ -14,11 +14,14 @@ function App() {
   const cart = useSelector(state => state.cart);
 
   useEffect(() => {
+    dispatch(fetchCartData());
+  },[dispatch])
+
+  useEffect(() => {
     dispatch(sendCartData(cart));
   }, [cart, dispatch])
 
   
-
   return <Fragment>
     <Layout>
       {toggleCart && <Cart />}
