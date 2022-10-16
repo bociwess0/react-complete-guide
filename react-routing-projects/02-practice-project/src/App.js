@@ -5,11 +5,12 @@ import { Redirect } from 'react-router-dom';
 import AllQuotes from './components/pages/AllQuotes';
 import QuoteDetail from './components/pages/QuoteDetail';
 import NewQuote from './components/pages/NewQuote';
+import Layout from './components/layout/Layout';
 
 function App() {
   return (
-    <div>
-        <Switch>
+    <Layout>
+       <Switch>
           <Route path="/" exact>
             <Redirect to="/quotes" />
           </Route>
@@ -22,9 +23,8 @@ function App() {
           <Route path="/new-route">
             <NewQuote />
           </Route>
-
         </Switch>
-    </div>
+    </Layout>
   );
 }
 
