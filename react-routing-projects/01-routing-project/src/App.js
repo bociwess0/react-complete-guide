@@ -9,10 +9,10 @@ function App() {
     <div>
       <MainHeader />
       <main>
-        <Route path="/welcome">
+        <Route path='/welcome'>
           <Welcome />
         </Route>
-        <Route path="/products">
+        <Route path='/products'>
           <Products />
         </Route>
       </main>
