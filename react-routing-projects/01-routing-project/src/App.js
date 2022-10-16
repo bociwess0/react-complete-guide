@@ -1,6 +1,7 @@
 import { Route } from 'react-router-dom';
 import { Switch } from "react-router-dom";
 // Sometimes, you only want to have one active route at the same time. Thats when we use Switch.
+import { Redirect } from 'react-router-dom';
 
 import Welcome from './pages/Welcome';
 import Products from './pages/Products';
@@ -13,6 +14,9 @@ function App() {
       <MainHeader />
       <Switch>
         <main>
+          <Route path='/' exact>
+            <Redirect to="/welcome" />
+          </Route>
           <Route path='/welcome'>
             <Welcome />
           </Route>
