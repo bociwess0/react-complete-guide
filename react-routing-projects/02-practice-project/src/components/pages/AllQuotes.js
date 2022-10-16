@@ -1,4 +1,7 @@
+import { useParams } from "react-router-dom";
+
 const AllQuotes = () => {
+    
     return <h1>All Quotes</h1>
 }
 
