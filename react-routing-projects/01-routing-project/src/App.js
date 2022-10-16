@@ -1,4 +1,6 @@
 import { Route } from 'react-router-dom';
+import { Switch } from "react-router-dom";
+// Sometimes, you only want to have one active route at the same time. Thats when we use Switch.
 
 import Welcome from './pages/Welcome';
 import Products from './pages/Products';
@@ -9,17 +11,20 @@ function App() {
   return (
     <div>
       <MainHeader />
-      <main>
-        <Route path='/welcome'>
-          <Welcome />
-        </Route>
-        <Route path='/products'>
-          <Products />
-        </Route>
-        <Route path='/product-detail/:productId'>
-          <ProductDetail />
-        </Route>
-      </main>
+      <Switch>
+        <main>
+          <Route path='/welcome'>
+            <Welcome />
+          </Route>
+          <Route path='/products' exact> 
+          {/* The exact prop. This tells React router, that this should only lead to a match if we have an exact match. */}
+            <Products />
+          </Route>
+          <Route path='/products/:productId'>
+            <ProductDetail />
+          </Route>
+        </main>
+      </Switch>
     </div>
   );
 }
