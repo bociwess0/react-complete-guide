@@ -1,4 +1,4 @@
-const FIREBASE_DOMAIN = 'https://react-routing-42d52-default-rtdb.firebaseio.com';
+const FIREBASE_DOMAIN = 'https://react-routing-42d52-default-rtdb.firebaseio.com/';
 
 export async function getAllQuotes() {
   const response = await fetch(`${FIREBASE_DOMAIN}/quotes.json`);
@@ -55,10 +55,10 @@ export async function addQuote(quoteData) {
   return null;
 }
 
-export async function addComment(requestData) {
-  const response = await fetch(`${FIREBASE_DOMAIN}/comments/${requestData.quoteId}.json`, {
+export async function addComment(commentData, quoteId) {
+  const response = await fetch(`${FIREBASE_DOMAIN}/comments/${quoteId}.json`, {
     method: 'POST',
-    body: JSON.stringify(requestData.commentData),
+    body: JSON.stringify(commentData),
     headers: {
       'Content-Type': 'application/json',
     },

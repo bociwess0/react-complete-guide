@@ -1,8 +1,5 @@
 import { Fragment } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-//Where useHistory gives us access to the history object, an object that allows us to change and manage the URL,
-//useLocation gives us access to a location object which has information about the currently loaded page,
-//about the currently loaded URL.
 
 import QuoteItem from './QuoteItem';
 import classes from './QuoteList.module.css';
@@ -18,35 +15,30 @@ const sortQuotes = (quotes, ascending) => {
 };
 
 const QuoteList = (props) => {
-
   const history = useHistory();
   const location = useLocation();
 
+  const queryParams = new URLSearchParams(location.search);
 
-  const queryParams = new URLSearchParams(location.search); //gets our link
-  const isSortingAcending = queryParams.get('sort') === 'asc';
-  //get give us a value of a stored key
+  const isSortingAscending = queryParams.get('sort') === 'asc';
 
-  const sortMethod = isSortingAcending ? 'Descending' : 'Ascending';
-
-  
-  const sortedQuotes = sortQuotes(props.quotes, isSortingAcending);
+  const sortedQuotes = sortQuotes(props.quotes, isSortingAscending);
 
   const changeSortingHandler = () => {
-    
     history.push({
       pathname: location.pathname,
-      search: `?sort=${(isSortingAcending ? 'desc' : 'asc')}`
-    })
-    //key: sort, value: asc
-  }
+      search: `?sort=${(isSortingAscending ? 'desc' : 'asc')}`
+    });
+  };
 
   return (
     <Fragment>
+      <div className={classes.sorting}>
+        <button onClick={changeSortingHandler}>
+          Sort {isSortingAscending ? 'Descending' : 'Ascending'}
+        </button>
+      </div>
       <ul className={classes.list}>
-        <div className={classes.sorting}>
-          <button onClick={changeSortingHandler} >Sort {sortMethod}</button>
-        </div>
         {sortedQuotes.map((quote) => (
           <QuoteItem
             key={quote.id}
