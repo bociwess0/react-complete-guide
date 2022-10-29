@@ -2,9 +2,9 @@ import classes from './Layout.module.css';
 import MainHeader from './MainHeader';
 
 const Layout = (props) => {
-    return <div>
+    return <div >
         <MainHeader />
-        <main>{props.children}</main>
+        <main className={classes.main}>{props.children}</main>
     </div>
 }
 

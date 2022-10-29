@@ -15,20 +15,20 @@ const QUOTE_DATA = [
     }
 ]
 
-const quoteList = () => {
+const QuoteList = () => {
 
     const quotes = QUOTE_DATA;
 
     return <div className={classes.list}>
-        {quotes.map((quote) => {
+        {quotes.map((quote) => (
             <QuoteItem 
                 key = {quote.id}
                 id = {quote.id}
                 title = {quote.title}
                 description = {quote.description}
             />
-        })}
+        ))}
     </div>
 }
 
-export default quoteList;
+export default QuoteList;
