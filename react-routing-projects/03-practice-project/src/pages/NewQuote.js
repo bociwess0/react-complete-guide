@@ -1,11 +1,8 @@
-import { Fragment } from "react"
+import QuoteForm from "../components/quotes/QuoteForm"
 
 
 const NewQuote = () => {
-    return  <Fragment>
-
-    </Fragment>
-
+    return  <QuoteForm />
 }
 
 export default NewQuote;
