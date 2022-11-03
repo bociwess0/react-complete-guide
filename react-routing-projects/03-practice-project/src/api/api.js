@@ -2,7 +2,7 @@ const addQuoteFunction = async (quoteData) => {
   const response = await fetch(
     'https://react-routing-42d52-default-rtdb.firebaseio.com/quotes.json',
     {
-      method: 'PUT',
+      method: 'POST',
       body: JSON.stringify({
         author: quoteData.author,
         description: quoteData.text,
@@ -18,6 +18,7 @@ const addQuoteFunction = async (quoteData) => {
 
   return data;
 };
+
 
 export const addQuote = async (quoteData) => {
   try {
