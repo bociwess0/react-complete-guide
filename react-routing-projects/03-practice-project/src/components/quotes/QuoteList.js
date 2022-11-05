@@ -1,4 +1,6 @@
-import { useCallback, useEffect, useReducer, useState } from 'react';
+import {  useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchQuotes } from '../../store/quote-actions';
 import LoadingSpinner from '../UI/LoadingSinner';
 import QuoteItem from './QuoteItem';
 import classes from './QuoteList.module.css';
@@ -17,69 +19,18 @@ import classes from './QuoteList.module.css';
 //     }
 // ]
 
-const statusReducer = (state, action) => {
-
-    if(action.type === 'SEND') {
-        return 'pending';
-    }
-
-    if(action.type === 'SUCCESS') {
-        return 'completed';
-    }
-
-    if(action.type === 'ERROR') {
-        return 'completed';
-    }
-
-    return state;
-}
 
 const QuoteList = () => {
 
-    const [quotes, setQuotes] = useState([]);
-    const [status, dispatch] = useReducer(statusReducer, null)
 
-    const getQuotes = useCallback(async () => {
-
-        dispatch({type: 'SEND'});
-
-        try {
-            const response = await fetch ('https://react-routing-42d52-default-rtdb.firebaseio.com/quotes.json', {
-                    method: 'GET'
-                }
-            );
-      
-            if(!response.ok) {
-            throw new Error('Failed to fetch data!');
-            }
-
-            dispatch({type: 'SUCCESS'});
-      
-            const data = await response.json();
-        
-            const transformedQuotes = [];
-        
-            for(const key in data) {
-                const quoteObj = {
-                    id: key,
-                    ...data[key]
-                };
-            
-                transformedQuotes.push(quoteObj);
-            }
-
-            setQuotes(transformedQuotes);
-
-        } catch(error) {
-            dispatch({type: 'ERROR'});
-            console.log(error);
-        }
-    })
-
+    const dispatch = useDispatch();
+    const quotes = useSelector(state => state.quoteReducer.quotes);
+    const status = useSelector(state => state.quoteReducer.status);
+    
     
     useEffect(() => {
-        getQuotes();
-    }, []);
+        dispatch(fetchQuotes());
+    }, [dispatch]);
 
 
     if (status === 'pending') {
@@ -90,6 +41,7 @@ const QuoteList = () => {
         );
     }
     
+    console.log(quotes);
 
     return <div className={classes.list}>
         {quotes.map((quote) => (

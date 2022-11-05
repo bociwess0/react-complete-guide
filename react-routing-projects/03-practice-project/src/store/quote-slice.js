@@ -4,9 +4,14 @@ const quoteSlice = createSlice({
     name: 'quotes',
     initialState: {
         quotes: [],
+        status: '',
         changed: false
     }, 
     reducers: {
+        replaceQuotes(state, action) {
+            state.quotes = action.payload.quotes;
+            state.status = action.payload.status;
+        },
         addQuoteItem(state, action) {
             
         }

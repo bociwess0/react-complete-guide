@@ -4,7 +4,7 @@ import quoteSlice from './quote-slice';
 
 
 const store = configureStore({
-    reducer: { quotes: quoteSlice.reducer}
+    reducer: { quoteReducer: quoteSlice.reducer}
 })
 
 export default store;
