@@ -26,10 +26,12 @@ const QuoteList = () => {
     const dispatch = useDispatch();
     const quotes = useSelector(state => state.quoteReducer.quotes);
     const status = useSelector(state => state.quoteReducer.status);
-    
+    const isChanged = useSelector(state => state.quoteReducer.status);
     
     useEffect(() => {
-        dispatch(fetchQuotes());
+        if(!isChanged) {
+            dispatch(fetchQuotes());
+        }
     }, [dispatch]);
 
 
@@ -40,13 +42,12 @@ const QuoteList = () => {
           </div>
         );
     }
-    
-    console.log(quotes);
 
+    
     return <div className={classes.list}>
-        {quotes.map((quote) => (
+        { quotes.map((quote, index) => (
             <QuoteItem 
-                key = {quote.id}
+                key = {index}
                 id = {quote.id}
                 title = {quote.author}
                 description = {quote.description}

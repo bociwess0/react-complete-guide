@@ -1,13 +1,21 @@
-import { Fragment, useReducer, useRef } from 'react';
-import { addQuote } from '../../api/api';
+import { Fragment, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { addQuote } from '../../store/quote-actions';
+import LoadingSpinner from '../UI/LoadingSinner';
 
 
 import classes from './QuoteForm.module.css';
+
+let ID = 0;
 
 const QuoteForm = (props) => {
 
     const authorInputRef = useRef();
     const textInputRef = useRef();
+    const dispatch = useDispatch();
+    const status = useSelector(state => state.quoteReducer.status);
+    const quotes = useSelector(state => state.quoteReducer.quotes);
+
 
     const addQuoteHandler = (event) => {
         event.preventDefault();
@@ -27,29 +35,39 @@ const QuoteForm = (props) => {
             return;
         }
 
+        quote.id = ID++;
         quote.author = enteredAuthor;
-        quote.text = enteredText;
-        console.log(quote);
-        addQuote(quote);
+        quote.description = enteredText;
+        
+        dispatch(addQuote(quote));
+
     }
 
-  return (
-    <Fragment>
-        <form className={classes.form} onSubmit={addQuoteHandler}>
-            <div className={classes.control}>
-                <label htmlFor='author'>Author</label>
-                <input type='text' id='author' ref={authorInputRef}/>
-            </div>
-            <div className={classes.control}>
-                <label htmlFor='text'>Text</label>
-                <textarea id='text' rows='5' ref={textInputRef}></textarea>
-            </div>
-            <div className={classes.actions}>
-                <button className='btn'>Add Quote</button>
-            </div>
-        </form>
-    </Fragment>
-  );
+    if (status === 'pending') {
+        return (
+          <div className='centered'>
+            <LoadingSpinner />
+          </div>
+        );
+    }
+
+    return (
+        <Fragment>
+            <form className={classes.form} onSubmit={addQuoteHandler}>
+                <div className={classes.control}>
+                    <label htmlFor='author'>Author</label>
+                    <input type='text' id='author' ref={authorInputRef}/>
+                </div>
+                <div className={classes.control}>
+                    <label htmlFor='text'>Text</label>
+                    <textarea id='text' rows='5' ref={textInputRef}></textarea>
+                </div>
+                <div className={classes.actions}>
+                    <button className='btn'>Add Quote</button>
+                </div>
+            </form>
+        </Fragment>
+    );
 };
 
 export default QuoteForm;

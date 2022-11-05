@@ -1,30 +1,13 @@
 import { useState } from "react"
 import { quoteActions } from "./quote-slice";
 
-const statusReducer = (state, action) => {
-
-    if(action.type === 'SEND') {
-        return 'pending';
-    }
-
-    if(action.type === 'SUCCESS') {
-        return 'completed';
-    }
-
-    if(action.type === 'ERROR') {
-        return 'completed';
-    }
-
-    return state;
-}
-
+const DATABASE_LINK = 'https://react-routing-42d52-default-rtdb.firebaseio.com';
 
 export const fetchQuotes = () => {
 
     return async (dispatch) => {
 
-        dispatch(quoteActions.replaceQuotes({
-            quotes: [],
+        dispatch(quoteActions.setStatus({
             status: 'pending'
         }))
 
@@ -32,7 +15,7 @@ export const fetchQuotes = () => {
 
         const fetchQuotes = async () => {
             
-            const response = await fetch ('https://react-routing-42d52-default-rtdb.firebaseio.com/quotes.json', {
+            const response = await fetch (`${DATABASE_LINK}/quotes.json`, {
                     method: 'GET'
                 }
             );
@@ -61,22 +44,72 @@ export const fetchQuotes = () => {
                 arrayOfQuotes.push(quoteData);
             }
 
-            console.log(arrayOfQuotes);
-
             dispatch(quoteActions.replaceQuotes({
-                quotes: arrayOfQuotes || [],
-                status: 'completed'
+                quotes: arrayOfQuotes || []
             }))
 
+            dispatch(quoteActions.setStatus({
+                status: 'completed'
+            }))
+            
         } catch(error) {
 
-            dispatch(quoteActions.replaceQuotes({
-                quotes: arrayOfQuotes || [],
+            dispatch(quoteActions.setStatus({
                 status: 'completed'
             }))
+
             console.log(error);
         }
 
     }
 
+}
+
+export const addQuote = (quoteData) => {
+    return async (dispatch) => {
+
+        dispatch(quoteActions.setStatus({
+            status: 'pending'
+        }))
+
+        const sendRequest = async () => {
+            const response = await fetch(`${DATABASE_LINK}/quotes.json`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    id: quoteData.id,
+                    author: quoteData.author,
+                    description: quoteData.description
+                })
+            });
+
+            if(!response.ok) {
+                throw new Error('Failed to send data!')
+            }
+
+            const data = await response.json();
+
+            return data;
+        }
+
+        try {
+            
+            await sendRequest();
+
+            dispatch(quoteActions.addQuoteItem( {
+                id: quoteData.id,
+                author: quoteData.author,
+                description: quoteData.description
+            }))
+
+            dispatch(quoteActions.setStatus({
+                status: 'completed'
+            }))
+
+        } catch(error) {
+
+            
+            console.log(error);
+        }
+
+    }
 }
