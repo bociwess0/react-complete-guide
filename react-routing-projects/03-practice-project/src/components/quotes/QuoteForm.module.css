@@ -42,9 +42,19 @@
   
   .actions {
     text-align: right;
+    margin-top: 30px;
+    margin-bottom: 10px;
   }
   
-  .actions button {
+  .actions a {
     font-size: 1.25rem;
+  }
+
+  .card {
+    padding: 1rem;
+    margin: 1rem;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 20%);
+    border-radius: 6px;
+    background-color: white;
   }
   

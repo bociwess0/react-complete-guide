@@ -161,6 +161,37 @@ export const deleteQuote = (deleteTarget) => {
 
     }
 
+}
 
+export const getSignleQuote = (quoteId) => {
+    return async (dispatch) => {
+        const sendRequest = async () => {
 
+            const response = await fetch(`${DATABASE_LINK}/quotes/${quoteId}.json`);
+
+            if(!response.ok) {
+                throw new Error ('Fialed to fetch data!');
+            }
+
+            const data = response.json();
+
+            return data;
+        }
+
+        try {
+
+            const quote = await sendRequest();
+
+            const quoteData = {
+                id: quoteId,
+                ...quote
+            }
+
+            dispatch(quoteActions.updateSpecificQuote(quoteData));
+
+        } catch(error) {
+            console.log(error);
+        }
+
+    }
 }

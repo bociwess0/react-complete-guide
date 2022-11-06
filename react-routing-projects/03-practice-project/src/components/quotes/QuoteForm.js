@@ -1,5 +1,6 @@
 import { Fragment, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { addQuote } from '../../store/quote-actions';
 import LoadingSpinner from '../UI/LoadingSinner';
 
@@ -49,19 +50,21 @@ const QuoteForm = (props) => {
 
     return (
         <Fragment>
-            <form className={classes.form} onSubmit={addQuoteHandler}>
-                <div className={classes.control}>
-                    <label htmlFor='author'>Author</label>
-                    <input type='text' id='author' ref={authorInputRef}/>
-                </div>
-                <div className={classes.control}>
-                    <label htmlFor='text'>Text</label>
-                    <textarea id='text' rows='5' ref={textInputRef}></textarea>
-                </div>
-                <div className={classes.actions}>
-                    <button className='btn'>Add Quote</button>
-                </div>
-            </form>
+            <div className={classes.card}>
+                <form className={classes.form} onSubmit={addQuoteHandler}>
+                    <div className={classes.control}>
+                        <label htmlFor='author'>Author</label>
+                        <input type='text' id='author' ref={authorInputRef}/>
+                    </div>
+                    <div className={classes.control}>
+                        <label htmlFor='text'>Text</label>
+                        <textarea id='text' rows='5' ref={textInputRef}></textarea>
+                    </div>
+                    <div className={classes.actions}>
+                        <Link className='btn' to={'/quotes'}>Add Quote</Link>
+                    </div>
+                </form>
+            </div>
         </Fragment>
     );
 };

@@ -1,0 +1,22 @@
+.quoteWrapepr {
+    background-color: #162b2b;
+    color: white;
+    border-radius: 6px;
+    padding: 3rem;
+    margin: 3rem auto;
+    max-width: 40rem;
+}
+
+.description {
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 60px;
+}
+
+
+.author {
+    font-style: italic;
+    font-size: 1.2rem;
+    text-align: right;
+    color: #a1e0e0;
+}

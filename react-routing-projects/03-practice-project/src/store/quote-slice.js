@@ -4,6 +4,7 @@ const quoteSlice = createSlice({
     name: 'quotes',
     initialState: {
         quotes: [],
+        singleQuote: {},
         status: ''
     }, 
     reducers: {
@@ -23,6 +24,9 @@ const quoteSlice = createSlice({
         deleteQuoteItem(state, action) {
             const deleteTarget = state.quotes.find((quote) => quote.id === action.payload.id);
             state.quotes = state.quotes.filter((quote) => quote.id !== deleteTarget.id);
+        },
+        updateSpecificQuote(state, action) {
+            state.singleQuote = action.payload;
         }
         
     }
