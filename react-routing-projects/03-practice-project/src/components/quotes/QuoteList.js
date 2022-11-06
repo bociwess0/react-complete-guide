@@ -26,12 +26,11 @@ const QuoteList = () => {
     const dispatch = useDispatch();
     const quotes = useSelector(state => state.quoteReducer.quotes);
     const status = useSelector(state => state.quoteReducer.status);
-    const isChanged = useSelector(state => state.quoteReducer.status);
     
     useEffect(() => {
-        if(!isChanged) {
-            dispatch(fetchQuotes());
-        }
+        
+        dispatch(fetchQuotes());
+
     }, [dispatch]);
 
 

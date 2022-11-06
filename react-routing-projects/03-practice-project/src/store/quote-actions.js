@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { quoteActions } from "./quote-slice";
 
 const DATABASE_LINK = 'https://react-routing-42d52-default-rtdb.firebaseio.com';
@@ -112,4 +111,56 @@ export const addQuote = (quoteData) => {
         }
 
     }
+}
+
+export const deleteQuote = (deleteTarget) => {
+    return async (dispatch) => {
+
+        dispatch(quoteActions.setStatus({
+            status: 'pending'
+        }))
+
+        
+        const sendRequest = async () => {
+
+            const response = await fetch (`${DATABASE_LINK}/quotes/${deleteTarget.id}.json`, {
+                method: 'DELETE',
+            })
+            
+            if(!response.ok) {
+                throw new Error('Failed to update data!');
+            }
+
+            if (response.status >= 400 && response.status < 600) {
+                throw new Error("Bad response from server");
+            }
+
+        }
+
+        try {
+
+            await sendRequest();
+
+            dispatch(quoteActions.deleteQuoteItem({
+                id: deleteTarget.id
+            }));
+
+            dispatch(quoteActions.setStatus({
+                status: 'completed'
+            }))
+    
+            
+        } catch(error) {
+
+            dispatch(quoteActions.setStatus({
+                status: 'completed'
+            }))
+
+            console.log(error);
+        }
+
+    }
+
+
+
 }

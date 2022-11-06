@@ -6,15 +6,12 @@ import LoadingSpinner from '../UI/LoadingSinner';
 
 import classes from './QuoteForm.module.css';
 
-let ID = 0;
-
 const QuoteForm = (props) => {
 
     const authorInputRef = useRef();
     const textInputRef = useRef();
     const dispatch = useDispatch();
     const status = useSelector(state => state.quoteReducer.status);
-    const quotes = useSelector(state => state.quoteReducer.quotes);
 
 
     const addQuoteHandler = (event) => {
@@ -35,7 +32,6 @@ const QuoteForm = (props) => {
             return;
         }
 
-        quote.id = ID++;
         quote.author = enteredAuthor;
         quote.description = enteredText;
         
