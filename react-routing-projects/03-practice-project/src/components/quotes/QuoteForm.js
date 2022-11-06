@@ -1,6 +1,7 @@
+import { useEffect } from 'react';
 import { Fragment, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { addQuote } from '../../store/quote-actions';
 import LoadingSpinner from '../UI/LoadingSinner';
 
@@ -13,6 +14,8 @@ const QuoteForm = (props) => {
     const textInputRef = useRef();
     const dispatch = useDispatch();
     const status = useSelector(state => state.quoteReducer.status);
+    const history = useHistory();
+
 
 
     const addQuoteHandler = (event) => {
@@ -37,6 +40,7 @@ const QuoteForm = (props) => {
         quote.description = enteredText;
         
         dispatch(addQuote(quote));
+        history.push('/quotes');
 
     }
 
@@ -50,7 +54,7 @@ const QuoteForm = (props) => {
 
     return (
         <Fragment>
-            <div className={classes.card}>
+            <div className={classes.card} >
                 <form className={classes.form} onSubmit={addQuoteHandler}>
                     <div className={classes.control}>
                         <label htmlFor='author'>Author</label>
@@ -61,7 +65,7 @@ const QuoteForm = (props) => {
                         <textarea id='text' rows='5' ref={textInputRef}></textarea>
                     </div>
                     <div className={classes.actions}>
-                        <Link className='btn' to={'/quotes'}>Add Quote</Link>
+                        <button className='btn'>Add Quote</button>
                     </div>
                 </form>
             </div>

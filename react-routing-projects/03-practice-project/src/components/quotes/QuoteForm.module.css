@@ -42,11 +42,9 @@
   
   .actions {
     text-align: right;
-    margin-top: 30px;
-    margin-bottom: 10px;
   }
   
-  .actions a {
+  .actions button {
     font-size: 1.25rem;
   }
 
