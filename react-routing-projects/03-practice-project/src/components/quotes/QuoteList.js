@@ -2,6 +2,7 @@ import {  useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchQuotes } from '../../store/quote-actions';
 import LoadingSpinner from '../UI/LoadingSinner';
+import NoQuotesFound from './NoQuotesFound';
 import QuoteItem from './QuoteItem';
 import classes from './QuoteList.module.css';
 
@@ -28,7 +29,7 @@ const QuoteList = () => {
     const status = useSelector(state => state.quoteReducer.status);
     
     useEffect(() => {
-        
+
         dispatch(fetchQuotes());
 
     }, [dispatch]);
@@ -42,9 +43,13 @@ const QuoteList = () => {
         );
     }
 
+    if(quotes.length === 0) {
+        return <NoQuotesFound />
+    }
+
     
     return <div className={classes.list}>
-        { quotes.map((quote, index) => (
+        { quotes.length > 0 && quotes.map((quote, index) => (
             <QuoteItem 
                 key = {index}
                 id = {quote.id}
