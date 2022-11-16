@@ -197,7 +197,7 @@ export const getSignleQuote = (quoteId) => {
     }
 }
 
-const addComment = (commentText) => {
+export const fetchComments = () => {
     return async (dispatch) => {
         dispatch(quoteActions.setStatus({
             status: 'pending'
@@ -220,9 +220,80 @@ const addComment = (commentText) => {
 
             const commentData = await sendRequest();
             
+            const arrayOfComments = [];
+
+            for(const key in commentData) {
+                const commentData = {
+                    id: key,
+                    ...commentData[key]
+                }
+                arrayOfComments.push(commentData);
+            }
+
+            dispatch(quoteActions.replaceComments({
+                comments: arrayOfComments || []
+            }))
+
+            dispatch(quoteActions.setStatus({
+                status: 'completed'
+            }));
+            
 
         } catch(error) {
             console.log(error);
+
+            dispatch(quoteActions.setStatus({
+                status: 'completed'
+            }));
+        }
+    }
+}
+
+
+export const addComment = (commentText, quoteId) => {
+    return async (dispatch) => {
+
+        dispatch(quoteActions.setStatus({
+            status: 'pending'
+        }));
+
+
+        const sendRequest = async () => {
+            const response = fetch(`${DATABASE_LINK}/comments.json`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    quoteId: quoteId,
+                    text: commentText
+                })
+            })
+
+            if(!response.ok) {
+                throw new Error('Failed to send data!');
+            }
+            
+            const data = (await response).json();
+
+            return data;
+        }
+
+        try {
+            await sendRequest();
+
+            dispatch(quoteActions.addComment({
+                quoteId: quoteId,
+                text: commentText
+            }));
+
+            dispatch(quoteActions.setStatus({
+                status: 'completed'
+            }));
+            
+        } catch(error) {
+            console.log(error);
+
+            dispatch(quoteActions.setStatus({
+                status: 'completed'
+            }));
         }
     }
 }

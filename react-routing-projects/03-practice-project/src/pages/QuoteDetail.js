@@ -15,11 +15,11 @@ const QuoteDetail = () => {
 
     useEffect(() => {
        dispatch(getSignleQuote(quoteId));
-    }, [dispatch]);
+    }, [dispatch, quoteId]);
 
     return <Fragment>
         <HighlightedQuote author={quote.author} description={quote.description} />
-        <Comments />
+        <Comments quoteId = {quote.quoteId} />
     </Fragment>
 }
 

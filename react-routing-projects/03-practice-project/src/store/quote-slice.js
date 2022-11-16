@@ -12,6 +12,9 @@ const quoteSlice = createSlice({
         replaceQuotes(state, action) {
             state.quotes = action.payload.quotes;
         },
+        replaceComments(state, action) {
+            state.comments = action.payload.comments;
+        },
         setStatus(state, action) {
             state.status = action.payload.status;
         },
@@ -21,6 +24,13 @@ const quoteSlice = createSlice({
                 quoteId: newQuote.quoteId,
                 author: newQuote.author,
                 description: newQuote.description
+            })
+        },
+        addComment(state, action) {
+            const newComment = action.payload;
+            state.comments.push({
+                quoteId: newComment.quoteId,
+                text: newComment.text
             })
         },
         deleteQuoteItem(state, action) {
