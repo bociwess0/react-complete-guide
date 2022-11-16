@@ -76,6 +76,7 @@ export const addQuote = (quoteData) => {
                 method: 'POST',
                 body: JSON.stringify({
                     id: quoteData.id,
+                    quoteId: quoteData.quoteId,
                     author: quoteData.author,
                     description: quoteData.description
                 })
@@ -193,5 +194,35 @@ export const getSignleQuote = (quoteId) => {
             console.log(error);
         }
 
+    }
+}
+
+const addComment = (commentText) => {
+    return async (dispatch) => {
+        dispatch(quoteActions.setStatus({
+            status: 'pending'
+        }));
+
+        const sendRequest = async () => {
+            const response = await fetch(`${DATABASE_LINK}/comments.json`);
+
+            if(!response.ok) {
+                throw new Error('Failed to fetch commnets!');
+            }
+
+            const data = await response.json();
+
+
+            return data;
+        }
+
+        try {
+
+            const commentData = await sendRequest();
+            
+
+        } catch(error) {
+            console.log(error);
+        }
     }
 }

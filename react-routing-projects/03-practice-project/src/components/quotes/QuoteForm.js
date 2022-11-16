@@ -14,6 +14,7 @@ const QuoteForm = (props) => {
     const textInputRef = useRef();
     const dispatch = useDispatch();
     const status = useSelector(state => state.quoteReducer.status);
+    const quotes = useSelector(state => state.quoteReducer.quotes);
     const history = useHistory();
 
 
@@ -36,6 +37,7 @@ const QuoteForm = (props) => {
             return;
         }
 
+        quote.quoteId = quotes.length + 1;
         quote.author = enteredAuthor;
         quote.description = enteredText;
         

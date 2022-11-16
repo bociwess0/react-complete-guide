@@ -4,6 +4,7 @@ const quoteSlice = createSlice({
     name: 'quotes',
     initialState: {
         quotes: [],
+        comments: [],
         singleQuote: {},
         status: ''
     }, 
@@ -17,6 +18,7 @@ const quoteSlice = createSlice({
         addQuoteItem(state, action) {
             const newQuote = action.payload;
             state.quotes.push({
+                quoteId: newQuote.quoteId,
                 author: newQuote.author,
                 description: newQuote.description
             })

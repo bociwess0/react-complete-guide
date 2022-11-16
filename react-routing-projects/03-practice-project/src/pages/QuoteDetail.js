@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { getSignleQuote } from "../store/quote-actions";
 import { Fragment } from "react";
 import HighlightedQuote from "../components/quotes/HighlightedQuote";
+import Comments from "../components/comments/Comments";
 
 const QuoteDetail = () => {
     
@@ -18,6 +19,7 @@ const QuoteDetail = () => {
 
     return <Fragment>
         <HighlightedQuote author={quote.author} description={quote.description} />
+        <Comments />
     </Fragment>
 }
 
