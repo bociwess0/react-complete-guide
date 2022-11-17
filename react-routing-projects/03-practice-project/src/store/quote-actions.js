@@ -197,8 +197,12 @@ export const getSignleQuote = (quoteId) => {
     }
 }
 
-export const fetchComments = () => {
+export const fetchComments = (quoteId) => {
+    
     return async (dispatch) => {
+
+        const arrayOfComments = [];
+
         dispatch(quoteActions.setStatus({
             status: 'pending'
         }));
@@ -218,16 +222,16 @@ export const fetchComments = () => {
 
         try {
 
-            const commentData = await sendRequest();
+            const data = await sendRequest();
             
-            const arrayOfComments = [];
-
-            for(const key in commentData) {
-                const commentData = {
-                    id: key,
-                    ...commentData[key]
+            for(const key in data) {
+                if(quoteId === data[key].quoteId) {
+                    const commentData = {
+                        id: key,
+                        ...data[key]
+                    }
+                    arrayOfComments.push(commentData);
                 }
-                arrayOfComments.push(commentData);
             }
 
             dispatch(quoteActions.replaceComments({
@@ -250,7 +254,7 @@ export const fetchComments = () => {
 }
 
 
-export const addComment = (commentText, quoteId) => {
+export const addComment = (author, commentText, quoteId) => {
     return async (dispatch) => {
 
         dispatch(quoteActions.setStatus({
@@ -259,10 +263,11 @@ export const addComment = (commentText, quoteId) => {
 
 
         const sendRequest = async () => {
-            const response = fetch(`${DATABASE_LINK}/comments.json`, {
+            const response = await fetch(`${DATABASE_LINK}/comments.json`, {
                 method: 'POST',
                 body: JSON.stringify({
                     quoteId: quoteId,
+                    author: author,
                     text: commentText
                 })
             })
@@ -271,16 +276,18 @@ export const addComment = (commentText, quoteId) => {
                 throw new Error('Failed to send data!');
             }
             
-            const data = (await response).json();
+            const data = await response.json();
 
             return data;
         }
 
         try {
+
             await sendRequest();
 
-            dispatch(quoteActions.addComment({
+            dispatch(quoteActions.addCommentItem({
                 quoteId: quoteId,
+                author: author,
                 text: commentText
             }));
 

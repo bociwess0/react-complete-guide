@@ -26,10 +26,11 @@ const quoteSlice = createSlice({
                 description: newQuote.description
             })
         },
-        addComment(state, action) {
+        addCommentItem(state, action) {
             const newComment = action.payload;
             state.comments.push({
                 quoteId: newComment.quoteId,
+                author: newComment.author,
                 text: newComment.text
             })
         },
