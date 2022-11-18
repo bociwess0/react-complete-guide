@@ -304,3 +304,29 @@ export const addComment = (author, commentText, quoteId) => {
         }
     }
 }
+
+export const deleteComment = (commentId) => {
+    return async (dispatch) => {
+        const sendRequest = async () => {
+            const response = await fetch(`${DATABASE_LINK}/comments/${commentId}.json`, {
+                method: 'DELETE'
+            })
+
+            
+            if(!response.ok) {
+                throw new Error('Failed to delete data!');
+            }
+        }
+        
+        try {
+
+            await sendRequest();
+
+        } catch(error) {
+
+            console.log(error);
+
+        }
+
+    }
+}

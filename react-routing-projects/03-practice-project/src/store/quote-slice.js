@@ -26,6 +26,13 @@ const quoteSlice = createSlice({
                 description: newQuote.description
             })
         },
+        deleteQuoteItem(state, action) {
+            const deleteTarget = state.quotes.find((quote) => quote.id === action.payload.id);
+            state.quotes = state.quotes.filter((quote) => quote.id !== deleteTarget.id);
+        },
+        updateSpecificQuote(state, action) {
+            state.singleQuote = action.payload;
+        },
         addCommentItem(state, action) {
             const newComment = action.payload;
             state.comments.push({
@@ -34,12 +41,9 @@ const quoteSlice = createSlice({
                 text: newComment.text
             })
         },
-        deleteQuoteItem(state, action) {
-            const deleteTarget = state.quotes.find((quote) => quote.id === action.payload.id);
-            state.quotes = state.quotes.filter((quote) => quote.id !== deleteTarget.id);
-        },
-        updateSpecificQuote(state, action) {
-            state.singleQuote = action.payload;
+        deleteCommentItem(state, action) {
+            const deleteTarget = state.comments.find((comment) => comment.id === action.payload.id);
+            state.comments = state.comments.filter((comment) => comment.id !== deleteTarget.id);
         }
         
     }

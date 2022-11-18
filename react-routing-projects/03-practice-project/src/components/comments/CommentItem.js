@@ -1,11 +1,12 @@
 
 import classes from './CommentItem.module.css';
 import close from './closeButton.png';
+import { useSelector } from 'react-redux';
 
 const CommentItem = (props) => {
 
     const deleteCommentHandler = () => {
-        console.log(props.quoteId);
+        console.log(props.commentId);
     }
 
     return <div className={classes.commentWrapper} >

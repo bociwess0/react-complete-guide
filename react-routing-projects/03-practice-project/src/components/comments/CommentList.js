@@ -14,6 +14,7 @@ const CommentList = (props) => {
                 {comments.map((comment, index) => (
                     <CommentItem 
                         key={index}
+                        commentId = {comment.id}
                         quoteId = {props.quoteId}
                         author = {comment.author}
                         text={comment.text}
