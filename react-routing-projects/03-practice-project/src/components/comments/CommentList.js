@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import CommentItem from './CommentItem';
 import classes from './CommentList.module.css';
 
-const CommentList = () => {
+const CommentList = (props) => {
 
     const comments = useSelector(state => state.quoteReducer.comments);
 
@@ -14,6 +14,7 @@ const CommentList = () => {
                 {comments.map((comment, index) => (
                     <CommentItem 
                         key={index}
+                        quoteId = {props.quoteId}
                         author = {comment.author}
                         text={comment.text}
                     />

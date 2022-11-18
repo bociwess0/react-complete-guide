@@ -1,8 +1,30 @@
 .commentWrapper {
     display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.commentContent {
+    display: flex;
     flex-direction: column;
     gap: 5px;
     margin-bottom: 1rem;
+}
+
+.closeButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.closeButton button {
+    border: none;
+    background: none;
+    width: fit-content;
+    height: fit-content;
+    padding: 0;
+    line-height: 0;
+    cursor: pointer;
 }
 
 .title {

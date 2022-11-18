@@ -43,7 +43,7 @@ const Comments = (props) => {
 
     return <Fragment>
         { !commentsLoaded  && <button className={`btn ${classes.btnComment}`} onClick={loadCommentsHandler} >Load Comments</button>}
-        { commentsLoaded && status === 'completed' && comments.length > 0 && <CommentList />}
+        { commentsLoaded && status === 'completed' && comments.length > 0 && <CommentList quoteId = {props.quoteId} />}
         { commentsLoaded && status === 'completed' && comments.length === 0 && <NoCommentsFound />}
         { commentsLoaded && !commentFormVisible && status === 'completed' && <button className={`btn ${classes.btnComment}`} onClick={showCommentFormHandler} >Add Comment</button>}
         { commentsLoaded && commentFormVisible && status === 'completed' && comments.length >= 0 && <CommentForm quoteId = {props.quoteId} onAddComment={showCommentFormHandler} />}
