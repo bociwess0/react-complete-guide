@@ -12,7 +12,6 @@ const CommentForm = (props) => {
     const commentInputRef = useRef();
     const authorInputRef = useRef();
     const status = useSelector(state => state.quoteReducer.status);
-    const comments = useSelector(state => state.quoteReducer.comments);
 
     const dispatch = useDispatch();
 

@@ -1,6 +1,6 @@
 import { quoteActions } from "./quote-slice";
 
-const DATABASE_LINK = 'https://react-routing-42d52-default-rtdb.firebaseio.com';
+const DATABASE_LINK = 'https://react-routing-v2-default-rtdb.firebaseio.com';
 
 export const fetchQuotes = () => {
 
@@ -307,6 +307,11 @@ export const addComment = (author, commentText, quoteId) => {
 
 export const deleteComment = (commentId) => {
     return async (dispatch) => {
+
+        dispatch(quoteActions.setStatus({
+            status: 'pending'
+        }));
+
         const sendRequest = async () => {
             const response = await fetch(`${DATABASE_LINK}/comments/${commentId}.json`, {
                 method: 'DELETE'
@@ -322,9 +327,22 @@ export const deleteComment = (commentId) => {
 
             await sendRequest();
 
+            dispatch(quoteActions.deleteCommentItem(commentId));
+
+            
+            dispatch(quoteActions.setStatus({
+                status: 'completed'
+            }));
+
+
         } catch(error) {
 
             console.log(error);
+
+            
+            dispatch(quoteActions.setStatus({
+                status: 'completed'
+            }));
 
         }
 

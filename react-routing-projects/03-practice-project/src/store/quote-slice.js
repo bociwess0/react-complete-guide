@@ -42,7 +42,7 @@ const quoteSlice = createSlice({
             })
         },
         deleteCommentItem(state, action) {
-            const deleteTarget = state.comments.find((comment) => comment.id === action.payload.id);
+            const deleteTarget = state.comments.find((comment) => comment.id === action.payload);
             state.comments = state.comments.filter((comment) => comment.id !== deleteTarget.id);
         }
         

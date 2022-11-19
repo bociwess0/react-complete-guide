@@ -1,12 +1,18 @@
 
 import classes from './CommentItem.module.css';
 import close from './closeButton.png';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteComment, fetchComments } from '../../store/quote-actions';
 
 const CommentItem = (props) => {
 
+    const comments = useSelector(state => state.quoteReducer.comments);
+    const dispatch = useDispatch();
+
     const deleteCommentHandler = () => {
-        console.log(props.commentId);
+        
+        dispatch(deleteComment(props.commentId));
+        
     }
 
     return <div className={classes.commentWrapper} >
