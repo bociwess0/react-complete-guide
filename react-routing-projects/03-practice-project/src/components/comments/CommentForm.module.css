@@ -55,3 +55,11 @@
   border-radius: 6px;
   background-color: white;
 }
+
+.validationFlex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: red;
+}
+
