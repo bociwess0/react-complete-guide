@@ -1,4 +1,4 @@
-import {  useEffect } from 'react';
+import {  useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchQuotes } from '../../store/quote-actions';
 import LoadingSpinner from '../UI/LoadingSinner';
@@ -27,6 +27,8 @@ const QuoteList = () => {
     const dispatch = useDispatch();
     const quotes = useSelector(state => state.quoteReducer.quotes);
     const status = useSelector(state => state.quoteReducer.status);
+    const [isSortingAscending, setIsSortingDescending] = useState('Descending');
+
     
     useEffect(() => {
 
@@ -49,6 +51,11 @@ const QuoteList = () => {
 
     
     return <div className={classes.list}>
+        <div className={classes.sorting}>
+                <button >
+                    Sort {isSortingAscending ? 'Descending' : 'Ascending'}
+                </button>
+            </div>
         { quotes.length > 0 && quotes.map((quote, index) => (
             <QuoteItem 
                 key = {index}

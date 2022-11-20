@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { useSelector } from 'react-redux';
 import CommentItem from './CommentItem';
 import classes from './CommentList.module.css';
