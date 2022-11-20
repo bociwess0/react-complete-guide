@@ -27,3 +27,10 @@
 .nav a.active {
     color: #ffffff;
 }
+
+@media (max-width: 576px) {
+
+    .logo {
+        font-size: 1.5rem;
+    }
+}
