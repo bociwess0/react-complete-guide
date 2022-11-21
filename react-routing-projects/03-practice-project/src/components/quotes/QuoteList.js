@@ -1,6 +1,7 @@
 import {  useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchQuotes } from '../../store/quote-actions';
+import { quoteActions } from '../../store/quote-slice';
 import LoadingSpinner from '../UI/LoadingSinner';
 import NoQuotesFound from './NoQuotesFound';
 import QuoteItem from './QuoteItem';
@@ -27,7 +28,30 @@ const QuoteList = () => {
     const dispatch = useDispatch();
     const quotes = useSelector(state => state.quoteReducer.quotes);
     const status = useSelector(state => state.quoteReducer.status);
-    const [isSortingAscending, setIsSortingDescending] = useState('Descending');
+    const [isSortingAscending, setIsSortingAscending] = useState(true);
+
+    const sortQuotes = () => {
+
+        dispatch(quoteActions.setStatus({
+            status: 'pending'
+        }));
+
+        setTimeout(() => {
+            dispatch(quoteActions.sortQuotes({
+                quotes: quotes,
+                ascending: isSortingAscending
+            }));
+
+            dispatch(quoteActions.setStatus({
+                status: 'completed'
+            }));
+
+            setIsSortingAscending(!isSortingAscending);
+
+        }, 200)
+
+    };
+
 
     
     useEffect(() => {
@@ -52,8 +76,8 @@ const QuoteList = () => {
     
     return <div className={classes.list}>
         <div className={classes.sorting}>
-                <button >
-                    Sort {isSortingAscending ? 'Descending' : 'Ascending'}
+                <button onClick={sortQuotes}>
+                    Sort {isSortingAscending ? 'Ascending' : 'Descending'}
                 </button>
             </div>
         { quotes.length > 0 && quotes.map((quote, index) => (

@@ -44,6 +44,23 @@ const quoteSlice = createSlice({
         deleteCommentItem(state, action) {
             const deleteTarget = state.comments.find((comment) => comment.id === action.payload);
             state.comments = state.comments.filter((comment) => comment.id !== deleteTarget.id);
+        },
+        sortQuotes(state, action) {
+
+            const sortQuotesHandler = (quotes) => {
+                return [].slice.call(quotes).sort((quoteA, quoteB) => {
+                    if(action.payload.ascending) {
+                        return quoteA.author > quoteB.author ? 1 : -1;
+                    } else {
+                        return quoteA.author < quoteB.author ? 1 : -1;
+                    }
+                });
+            };
+
+            const sortedQuotes = sortQuotesHandler(action.payload.quotes);
+
+            state.quotes = sortedQuotes;
+            
         }
         
     }
