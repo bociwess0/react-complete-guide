@@ -4,6 +4,8 @@ import { authActions } from '../../store/auth-slice';
 
 import classes from './AuthForm.module.css';
 
+const WEB_API_LINK = 'AIzaSyA9ZDjAqXdywGVBpdFKyNB2RHvJMLr6IT8';
+
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -25,9 +27,9 @@ const AuthForm = () => {
     setIsLoading(true);
     let url;
     if(isLogin){
-      url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA9ZDjAqXdywGVBpdFKyNB2RHvJMLr6IT8';
+      url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${WEB_API_LINK}`;
     } else {
-      url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA9ZDjAqXdywGVBpdFKyNB2RHvJMLr6IT8';
+      url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${WEB_API_LINK}`;
     }
 
     fetch(url, {
