@@ -1,4 +1,6 @@
 import { useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../../store/auth-slice';
 
 import classes from './AuthForm.module.css';
 
@@ -7,6 +9,8 @@ const AuthForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
+
+  const dispatch = useDispatch();
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -53,7 +57,7 @@ const AuthForm = () => {
         }
       })
       .then((data) => {
-        console.log(data);
+        dispatch(authActions.login(data.idToken));
       })
       .catch((err) => {
         alert(err.message);
