@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import classes from './ProfileForm.module.css';
 
 const WEB_API_LINK = 'AIzaSyA9ZDjAqXdywGVBpdFKyNB2RHvJMLr6IT8';
@@ -8,6 +9,7 @@ const WEB_API_LINK = 'AIzaSyA9ZDjAqXdywGVBpdFKyNB2RHvJMLr6IT8';
 const ProfileForm = () => {
   const newPasswordInputRef = useRef();
   const token = useSelector(state => state.authReducer.token);
+  const history = useHistory();
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -25,7 +27,7 @@ const ProfileForm = () => {
         'Content-Type': 'application/json'
       }
     }).then(res => {
-
+      history.replace('/');
     })
 
   }

@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { authActions } from '../../store/auth-slice';
 
 import classes from './AuthForm.module.css';
@@ -7,6 +8,7 @@ import classes from './AuthForm.module.css';
 const WEB_API_LINK = 'AIzaSyA9ZDjAqXdywGVBpdFKyNB2RHvJMLr6IT8';
 
 const AuthForm = () => {
+  const history = useHistory()
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const emailInputRef = useRef();
@@ -60,6 +62,7 @@ const AuthForm = () => {
       })
       .then((data) => {
         dispatch(authActions.login(data.idToken));
+        history.replace('/');
       })
       .catch((err) => {
         alert(err.message);
