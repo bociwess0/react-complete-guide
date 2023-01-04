@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import MeetupList from '../components/meetups/MeetupList';
+import { MongoClient } from 'mongodb';
 
 
 const DUMMY_MEETUPS = [
@@ -36,9 +37,27 @@ function HomePage(props) {
 // }
 
 export async function getStaticProps() {
+
+  const client = await MongoClient.connect(
+    'mongodb+srv://nikola:shSdpGtx1sHqjDBT@cluster0.ptcltxn.mongodb.net/meetups?retryWrites=true&w=majority'
+  );
+  const db = client.db();
+
+  const meetupsCollection = db.collection('meetups');
+
+  const meetups = await meetupsCollection.find().toArray();
+
+  client.close();
+
   return {
     props: {
-      meetups: DUMMY_MEETUPS
+      meetups: meetups.map(meetup => ({
+        title: meetup.title,
+        address: meetup.address,
+        image: meetup.image,
+        description: meetup.description,
+        id: meetup._id.toString()
+      }))
     },
     revalidate: 1 ,
     // Revalidate means that this page, with revalidate set to 10, would be regenerated on the server
