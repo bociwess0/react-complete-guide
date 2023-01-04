@@ -25,26 +25,26 @@ function HomePage(props) {
 }
 
 //this runs for every incoming request
-export async function getServerSideProps(context) {
-  const req = context.req;
-  const res = context.res;
-  return {
-        props: {
-          meetups: DUMMY_MEETUPS
-        }
-      }
-}
-
-// export async function getStaticProps() {
+// export async function getServerSideProps(context) {
+//   const req = context.req;
+//   const res = context.res;
 //   return {
-//     props: {
-//       meetups: DUMMY_MEETUPS
-//     },
-//     revalidate: 1 ,
-//     // Revalidate means that this page, with revalidate set to 10, would be regenerated on the server
-//     // at least every 10 seconds if there are requests coming in for this page. And then these regenerated pages
-//     // would replace the old pre-generated pages.
-//   }
+//         props: {
+//           meetups: DUMMY_MEETUPS
+//         }
+//       }
 // }
+
+export async function getStaticProps() {
+  return {
+    props: {
+      meetups: DUMMY_MEETUPS
+    },
+    revalidate: 1 ,
+    // Revalidate means that this page, with revalidate set to 10, would be regenerated on the server
+    // at least every 10 seconds if there are requests coming in for this page. And then these regenerated pages
+    // would replace the old pre-generated pages.
+  }
+}
 
 export default HomePage;
