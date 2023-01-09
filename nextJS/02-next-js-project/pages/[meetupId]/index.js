@@ -1,13 +1,24 @@
-import { Fragment } from "react";
-import MeetupDetail from "../../components/meetups/MeetupDetail";
+import { MongoClient, ObjectId } from 'mongodb';
+import { Fragment } from 'react';
+import Head from 'next/head';
 
-function MeetupDetails() {
-    return <MeetupDetail 
-        image = 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/1280px-Stadtbild_M%C3%BCnchen.jpg'
-        title = 'A First Meetup'
-        address = 'Some address 5, 12345 Some City'
-        description = 'This is a first meetup!'
-    />
+import MeetupDetail from '../../components/meetups/MeetupDetail';
+
+function MeetupDetails(props) {
+  return (
+    <Fragment>
+      <Head>
+        <title>{props.meetupData.title}</title>
+        <meta name='description' content={props.meetupData.description} />
+      </Head>
+      <MeetupDetail
+        image={props.meetupData.image}
+        title={props.meetupData.title}
+        address={props.meetupData.address}
+        description={props.meetupData.description}
+      />
+    </Fragment>
+  );
 }
 
 //here we describes all the dynamic values
